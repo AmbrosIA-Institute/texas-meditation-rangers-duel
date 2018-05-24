@@ -1,28 +1,29 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="institute.ambrosia.meditationrangers" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>Meditation Rangers</name>
-  <description>
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="institute.ambrosia.meditationrangers" version="0.2.15" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Meditation Rangers</name>
+    <description>
         Texas Meditation Rangers app
     </description>
-  <author email="jjackson@kallisteconsulting.com" href="http://ambrosia.institute">
+    <author email="jjackson@kallisteconsulting.com" href="http://ambrosia.institute">
         Joshua Jackson
     </author>
-  <content src="index.html"/>
-  <plugin name="cordova-plugin-whitelist" version="1"/>
-  <access origin="*"/>
-  <allow-intent href="http://*/*"/>
-  <allow-intent href="https://*/*"/>
-  <allow-intent href="tel:*"/>
-  <allow-intent href="sms:*"/>
-  <allow-intent href="mailto:*"/>
-  <allow-intent href="geo:*"/>
-  <platform name="android">
-    <allow-intent href="market:*"/>
-    <preference name="android-minSdkVersion" value="16"/>
-    <preference name="android-targetSdkVersion" value="19"/>
-  </platform>
-  <platform name="ios">
-    <allow-intent href="itms:*"/>
-    <allow-intent href="itms-apps:*"/>
-  </platform>
+    <content src="index.html" />
+    <plugin name="cordova-plugin-whitelist" version="1" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+    <platform name="android">
+        <preference name="android-targetSdkVersion" value="21" />
+    </platform>
+    <plugin name="cordova-plugin-android-fullscreen" spec="^1.0.0" />
+    <plugin name="institute.ambrosia.museplugin" spec="../cordova-plugin-muse" />
+    <engine name="android" spec="^6.4.0" />
 </widget>

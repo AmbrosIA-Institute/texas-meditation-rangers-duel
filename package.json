@@ -1,0 +1,21 @@
+{
+  "name": "institute.ambrosia.meditationrangers",
+  "version": "0.0.2",
+  "displayName": "Meditation Rangers",
+  "cordova": {
+    "platforms": [
+      "android"
+    ],
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-android-fullscreen": {},
+      "institute.ambrosia.museplugin": {}
+    }
+  },
+  "dependencies": {
+    "cordova-android": "^6.4.0",
+    "cordova-plugin-android-fullscreen": "^1.0.0",
+    "cordova-plugin-whitelist": "^1.3.3",
+    "institute.ambrosia.museplugin": "file:../cordova-plugin-muse"
+  }
+}

@@ -1,0 +1,6 @@
+[submodule "eeg-js-widgets"]
+	path = eeg-js-widgets
+	url = https://github.com/AmbrosIA-Institute/eeg-js-widgets.git
+[submodule "www/eeg-js-widgets"]
+	path = www/eeg-js-widgets
+	url = https://github.com/AmbrosIA-Institute/eeg-js-widgets.git
