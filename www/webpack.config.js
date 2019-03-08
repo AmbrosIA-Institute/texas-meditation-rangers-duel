@@ -30,7 +30,10 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: "babel-loader",
+          options: {
+            presets: ['@babel/preset-env']
+          }
         }
       },
       // Check first for url:() paths in SASS
@@ -38,6 +41,19 @@ module.exports = {
         test: /\.(png|jpg|gif)$/,
         loader: "url-loader",
       }, 
+
+      {
+       test: /\.svg$/,
+       use: [{
+         loader: 'file-loader',
+         options: {
+           emitFile: true,
+           name: '[name].[ext]',
+           outputPath: 'images/',    
+           publicPath: 'images/' 
+         }
+       }]
+      },
 
       // SASS, CSS..
       {
@@ -53,16 +69,16 @@ module.exports = {
 
       // Font files
       {
-         test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-         use: [{
-           loader: 'file-loader',
-           options: {
-             name: '[name].[ext]',
-             outputPath: 'fonts/',    // where the fonts will go
-             publicPath: 'fonts/'     // override the default path
-           }
-         }]
-       },
+       test: /.(ttf|otf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
+       use: [{
+         loader: 'file-loader',
+         options: {
+           name: '[name].[ext]',
+           outputPath: 'fonts/',    // where the fonts will go
+           publicPath: 'fonts/'     // override the default path
+         }
+       }]
+     },
     ]
   },
 
