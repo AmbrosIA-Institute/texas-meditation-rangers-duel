@@ -106,6 +106,12 @@ function update_game_display() {
 }
 
 
+function stop_game() {
+    window.clearInterval(timer_tracking);
+    game_started = false;
+}
+
+
 function start_game() {
     if (!game_started) {
         game_started = true;
@@ -169,7 +175,7 @@ function show_fft(container) {
 
 function customScaleThisScreen() {
     var contentWidth = document.body.scrollWidth, 
-        windowWidth = window.innerWidth, 
+        windowWidth = window.innerWidth - 8,
         newScale = windowWidth / contentWidth;
     document.body.style.zoom = newScale;
 }
@@ -205,14 +211,19 @@ $(document).ready(function() {
         start_game();
     });
     $("#reset").bind("click", function(event) {
+        stop_game();
         $('#head0').html('Player 1');
         $('#head1').html('Player 2');
-        $("#game").hide();
-        $("#splash").show();
+        //$("#game").hide();
+        //$("#splash").show();
+        //customScaleThisScreen();
     });
     $("#continue").bind("click", function(event) {
         $("#splash").hide();
         $("#game").show();
+        customScaleThisScreen();
+    });
+    $(window).resize(function(){
         customScaleThisScreen();
     });
 });
@@ -220,5 +231,7 @@ $(document).ready(function() {
 
 document.addEventListener('deviceready', function() {
     console.log("device ready");
+    customScaleThisScreen();
     go_fullscreen();
+    customScaleThisScreen();
 }, false);
