@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'RT Dromo Trial';
+    src: url('RTDromoTrial-Regular.woff2') format('woff2'),
+        url('RTDromoTrial-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+

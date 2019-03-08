@@ -1,83 +1,180 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <title>AmbrosIA Demo</title>
-        <script src="http://localhost:8001/target/target-script-min.js"></script>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/pixi.js"></script>
-        <script type="text/javascript" src="eeg-js-widgets/js/meters.js"></script>
-        <script type="text/javascript" src="eeg-js-widgets/js/fft.js"></script>
-        <script type="text/javascript" src="eeg-js-widgets/js/waveform.js"></script>
-        <script type="text/javascript" src="eeg-js-widgets/js/horseshoe.js"></script>
-        <script src="bower_components/d3/d3.js"></script>
-        <script src="bower_components/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <link rel="stylesheet" type="text/css" href="css/game.css">
-    </head>
-    <body>
-		<div id="splash">
-			<div id="wrapper">
-				<img src="img/tmr.png" width="892" height="468" />
-			</div>
-			<div id="footer">
-				<input type="button" id="continue" value="Continue" style="font-size: 24px;" />
-			</div>
-		</div>
-        <table id="game" class="disp" style="display: none">
-            <tr>
-                <td class="heading" id="head0">
-                    Player 1
-                </td>
-                <td class="heading" id="head1">
-                    Player 2
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 50%; height: 100%">
-                    <table>
-                        <tr>
-                            <td class="ffts">
-                                <div id="displayPlayer1"></div>
-                                <br />
-                                <input type="button" id="connect0" value="Connect Player 1" />
-                                <input type="button" id="disconnect0" value="Disconnect Player 1" />
-                                <input type="button" id="start" value="Start Round" />
-                                <input type="button" id="reset" value="Reset" />
-                            </td>
-                            <td >
-                                <div class="mellowouter">
-                                    <div class="mellowinner" id="mellow0">
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="width: 50%; height: 100%">
-                    <table>
-                        <tr>
-                            <td class="ffts">
-                                <div id="displayPlayer2"></div>
-                                <br />
-                                <input type="button" id="connect1" value="Connect Player 2" />
-                                <input type="button" id="disconnect1" value="Disconnect Player 2" />
-                            </td>
-                            <td >
-                                <div class="mellowouter">
-                                    <div class="mellowinner" id="mellow1">
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-    </body>
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+  <meta charset="utf-8">
+  <title>Meditation Deathmatch</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+  <link rel="stylesheet" href="dist/index.css">
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+  
+  <div id="viewport">
+
+    <section id="setttings">
+      
+
+    </section>
+    
+    <section id="game">
+      <div class="display">
+        <div class="controls">
+          <div class="controls-settings">
+            <button class="btn-settings">Settings</button>
+            <span class="time">03:00</span>
+          </div>
+          <div class="controls-game">
+            <button class="btn-battle btn-inverse">Battle</button>
+            <button class="btn-reset">Reset</button>
+          </div>
+        </div>
+        <div class="meter-container">
+          <h2>Meditation Meter</h2>
+          <div class="meter">
+            <div class="meter-svg"></div>
+          </div>
+        </div>
+      </div>
+      <div class="players">
+        <div class="player player-1">
+          <div class="player-detail">
+            <div class="player-icon">
+              <img src="dist/images/player1.svg" class="svg"/>
+            </div>
+            <div class="player-score">
+              <span class="player-score-value">0045</span>
+              <span class="player-score-label">Meditation Score</span>
+            </div>
+            <div class="player-actions">
+              <button class="btn-connect">Connect</button>
+              <button class="btn-disconnect">Disconnect</button>
+            </div>
+          </div>
+          <div class="player-status">
+            <div class="player-status-track">
+              <div class="player-status-track-fill"></div>
+              <div class="player-status-goal"></div>
+            </div>
+            <div class="player-status-label">Your Status</div>
+          </div>
+          <div class="player-feedback">
+
+            <div class="fl">
+              <div class="icon-headset">
+                <img src="dist/images/icon-headset.svg" class="svg" />
+                <span>Front Left</span>
+              </div>
+              
+              <div class="fft"></div>
+            </div>
+
+            <div class="fr">
+              <div class="icon-headset">
+                <img src="dist/images/icon-headset.svg" class="svg" />
+                <span>Front Right</span>
+              </div>
+              
+              <div class="fft"></div>
+            </div>
+
+            <div class="bl">
+              <div class="icon-headset">
+                <img src="dist/images/icon-headset.svg" class="svg" />
+                <span>Back Left</span>
+              </div>
+              
+              <div class="fft"></div>
+            </div>
+
+            <div class="br">
+              <div class="icon-headset">
+                <img src="dist/images/icon-headset.svg" class="svg" />
+                <span>Back Right</span>
+              </div>
+              
+              <div class="fft"></div>
+            </div>
+
+          </div>
+        </div> 
+
+
+
+           
+        <div class="player player-2">
+          <div class="player-detail">
+            <div class="player-icon">
+              <img src="dist/images/player1.svg" class="svg"/>
+            </div>
+            <div class="player-score">
+              <span class="player-score-value">0045</span>
+              <span class="player-score-label">Meditation Score</span>
+            </div>
+            <div class="player-actions">
+              <button class="btn-connect">Connect</button>
+              <button class="btn-disconnect">Disconnect</button>
+            </div>
+          </div>
+          <div class="player-status">
+            <div class="player-status-track">
+              <div class="player-status-track-fill"></div>
+              <div class="player-status-goal"></div>
+            </div>
+            <div class="player-status-label">Your Status</div>
+          </div>
+          <div class="player-feedback">
+
+            <div class="fl">
+              <div class="icon-headset">
+                <img src="dist/images/icon-headset.svg" class="svg" />
+                <span>Front Left</span>
+              </div>
+              
+              <div class="fft"></div>
+            </div>
+
+            <div class="fr">
+              <div class="icon-headset">
+                <img src="dist/images/icon-headset.svg" class="svg" />
+                <span>Front Right</span>
+              </div>
+              
+              <div class="fft"></div>
+            </div>
+
+            <div class="bl">
+              <div class="icon-headset">
+                <img src="dist/images/icon-headset.svg" class="svg" />
+                <span>Back Left</span>
+              </div>
+              
+              <div class="fft"></div>
+            </div>
+
+            <div class="br">
+              <div class="icon-headset">
+                <img src="dist/images/icon-headset.svg" class="svg" />
+                <span>Back Right</span>
+              </div>
+              
+              <div class="fft"></div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+  </div>
+
+  <script src="dist/index.js"></script>
+</body>
+
 </html>

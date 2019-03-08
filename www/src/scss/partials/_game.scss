@@ -1,0 +1,354 @@
+section#game 
+{
+  position:relative;
+  height:100%;
+
+  .display {
+    position:absolute;
+    width:100%;
+    height:50%;
+    padding:15px;
+    box-sizing:border-box;
+    overflow: hidden;
+    
+    .controls 
+    {
+      position:absolute;
+      z-index: 2;
+      display:flex;
+      justify-content: space-between;
+      left:72px;
+      right:72px;
+      top:50px;
+
+      
+      .controls-settings, .controls-game
+      {
+        display:inline-block;
+        
+        button, span 
+        {
+          background:none;
+          border:3px solid $color-black;
+          padding:8px 16px;
+          text-transform: uppercase;
+          font-weight: 700;
+          font-size:1.2rem;
+          letter-spacing: 1px;
+          transition: all 200ms ease-out;
+        }
+
+        
+
+        span.time 
+        {
+          background:$color-black;
+          color:$color-meter-start;
+        }
+
+        button.btn-battle
+        {
+          background:$color-black;
+          color:$color-meter-end;
+        }
+
+        button:hover{
+          border-color:white;
+          color:white;
+          cursor: pointer;
+        }
+      }
+
+    }
+    .meter-container
+    {
+      width:100%;
+      height:100%;
+      position:relative;
+      border-radius:72px;      
+      background: $color-meter-start;
+      background: linear-gradient(90deg, $color-meter-start 0%, $color-meter-end 100%);
+      overflow: hidden;
+
+      h2 {
+        position:absolute;
+        left:50%;
+        top:50%;
+        transform:translate(-50%,-50%);
+        font-weight:200;
+        text-transform:uppercase;
+        font-size:2rem;
+      }
+
+      .meter 
+      {
+        position:absolute;
+        left:50%;
+        bottom:-75px;
+        transform:translate(-50%,0);
+        
+        .meter-svg 
+        {
+          width:153px;
+          height:349px;
+          background: url(../images/meter.svg);
+          transform: scale($meter-scale,$meter-scale);
+          transform-origin: 76.5px 272px;
+        }
+
+      }
+
+    }
+
+  }
+
+  .players {
+    position:absolute;
+    top:50%;
+    width:100%;
+    height:50%;
+
+    .player {
+      height:100%;
+      // border:1px solid white;
+      padding:2rem;
+      display:flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .player-detail 
+    {
+      display:flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      .player-icon, .player-score, .player-actions
+      {
+        display:inline-block;
+      }
+
+      .player-score {
+        .player-score-value {
+          font-size:2rem;
+          border-bottom:2px solid;
+          display:block;
+          padding-bottom:2px;
+          text-align: center;
+        }
+        .player-score-label {
+          font-size:0.3rem;
+          text-transform:uppercase;
+        }
+      }
+
+      .player-actions 
+      {
+        margin:0 1rem;
+
+        button {
+          background:none;
+          color:white;
+          padding:5px 10px;
+          font-size:0.8rem;
+          text-transform:uppercase;
+          border-radius:4px;
+          line-height: 0.7rem;
+          transition:all 200ms ease-out;
+
+          &:hover {
+            border-color:white !important;
+            color:white !important;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+
+    .player-status 
+    {
+      width:100%;
+      box-sizing:border-box;
+      padding-right:1rem;
+
+      .player-status-track {
+        width:100%;
+        height:24px;
+        border:1px solid;
+        position: relative;
+
+        .player-status-track-fill {
+          width:25%;
+          height:100%;
+          
+        }
+
+        .player-status-goal {
+          position:absolute;
+          width:2px;
+          right:25%;
+          top:0; bottom:0;
+         
+        }
+      }
+
+      .player-status-label {
+        margin:0.5rem 0;
+        text-transform:uppercase;
+      }
+    }
+
+
+    .player-feedback
+    {
+      height:50%;
+      position:relative;
+      
+      .fl { top:0; left:0; }
+      .fr { top:0; right:0; }
+      .bl { bottom:0; left:0; }
+      .br { bottom:0; right:0; }
+
+      .fl,.fr,.bl,.br 
+      {
+        width:50%;
+        height:50%;
+        position:absolute;
+        display:flex;
+
+        .icon-headset {
+
+          path {
+            stroke: #666;
+
+            &.pad {
+              fill:#666;
+            }
+          }
+
+          span {
+            display:block;
+            font-size:0.6rem;
+            color:#666;
+            text-transform:uppercase;
+          }
+        }
+
+        .fft {
+          height:75%;
+          flex:1;
+          border:1px solid;
+          margin:0 1rem;
+          border-radius:0.5rem;
+          background-color:#222;
+        }
+      }
+
+      
+    }
+
+    .player-1, .player-2 
+    {
+      position:absolute;
+      width:50%;
+      height:100%;
+      box-sizing:border-box;
+    }
+
+    .player-1 {
+      color:$color-meter-start;
+    }
+    
+    .player-1 
+    {
+      .player-detail
+      {
+        .player-icon 
+        {
+          path.head 
+          {
+            fill:$color-meter-start;
+          }
+        }
+
+        .player-actions 
+        {
+          button {
+            border-color:$color-meter-start;
+            color:$color-meter-start;
+          }
+        }
+      }
+
+      .player-status
+      {
+        .player-status-track-fill,
+        .player-status-goal {
+          background-color:$color-meter-start;
+        }
+      }
+      
+      .player-feedback 
+      {
+        .fl .icon-headset path.front-left,
+        .fr .icon-headset path.front-right,
+        .bl .icon-headset path.back-left,
+        .br .icon-headset path.back-right {
+          stroke: $color-meter-start;
+        }
+      }
+      
+    }
+
+    .player-2 {
+      right:0;
+      color:$color-meter-end;
+    }
+
+    .player-2 
+    {
+      .player-detail
+      {
+        flex-direction: row-reverse;
+        .player-icon 
+        {
+          transform: scaleX(-1);
+          path.head 
+          {
+            fill:$color-meter-end;
+          }
+        }
+
+        .player-actions 
+        {
+          button {
+            border-color:$color-meter-end;
+            color:$color-meter-end;
+          }
+        }
+      }
+
+      .player-status
+      {
+        .player-status-track-fill,
+        .player-status-goal {
+          background-color:$color-meter-end;
+        }
+      }
+      
+      .player-feedback 
+      {
+        .fl .icon-headset path.front-left,
+        .fr .icon-headset path.front-right,
+        .bl .icon-headset path.back-left,
+        .br .icon-headset path.back-right {
+          stroke: $color-meter-end;
+        }
+      }
+      
+    }
+
+
+  }
+}
