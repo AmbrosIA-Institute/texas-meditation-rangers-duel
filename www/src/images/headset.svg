@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="59px" height="61px" viewBox="0 0 59 61" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.2 (51160) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-headset</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 0.205894621 6.98890608 0.205894621 6.98890608 14 0 14"></polygon>
+        <polygon id="path-3" points="0.0250138171 0.205894621 6.78841935 0.205894621 6.78841935 14 0.0250138171 14"></polygon>
+    </defs>
+    <g id="icon-headset" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="headset" transform="translate(8.000000, 9.000000)">
+            <g id="backleft" transform="translate(0.000000, 16.000000)" stroke="#231F20" stroke-width="6">
+                <path class="back-left" d="M1.35568889,0.168674468 C0.447244444,3.10988723 0.154133333,5.87065319 0.154133333,8.23799362 C0.154133333,13.3204617 1.51857778,18.0242489 3.83524444,21.8658234" id="Stroke-3"></path>
+            </g>
+            <g id="frontleft" transform="translate(2.000000, 0.000000)" stroke="#231F20" stroke-width="6">
+                <path class="front-left" d="M18.9441083,0.212843284 C10.2531917,0.212843284 2.84748929,6.34493284 0.022822619,14.9374701" id="Stroke-7"></path>
+            </g>
+            <g id="frontright" transform="translate(22.000000, 0.000000)" stroke="#231F20" stroke-width="6">
+                <path class="front-right" d="M19.8600706,14.9374701 C16.9217176,6.34493284 9.21795294,0.212619403 0.177247059,0.212843284" id="Stroke-11"></path>
+            </g>
+            <g id="backright" transform="translate(40.000000, 16.000000)" stroke="#231F20" stroke-width="6">
+                <path class="back-right" d="M0.0583529412,21.8658468 C2.51129412,18.0242723 3.95576471,13.3204851 3.95576471,8.23801702 C3.95576471,5.40259149 3.50658824,2.68488936 2.68352941,0.168697872" id="Stroke-15"></path>
+            </g>
+            <g id="padleft" transform="translate(1.000000, 32.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-18"></g>
+                <path class="pad" d="M0.0322466667,7.35593793 C0.29218,11.162731 2.05291333,14.1350759 3.96508,13.9953172 C5.87724667,13.8555586 7.21658,10.6565586 6.95664667,6.8500069 C6.69671333,3.04345517 4.93598,0.0708689655 3.02381333,0.210627586 C1.11164667,0.350627586 -0.227686667,3.54938621 0.0322466667,7.35593793" id="Fill-17" fill="#231F20" mask="url(#mask-2)"></path>
+            </g>
+            <g id="padright" transform="translate(37.000000, 32.000000)">
+                <mask id="mask-4" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <g id="Clip-21"></g>
+                <path class="pad" d="M6.7572129,7.35593793 C6.50589032,11.162731 4.80172903,14.1350759 2.95147097,13.9953172 C1.1009871,13.8555586 -0.195141935,10.6565586 0.0561806452,6.8500069 C0.307729032,3.04345517 2.01166452,0.0708689655 3.86237419,0.210627586 C5.71285806,0.350627586 7.0089871,3.54938621 6.7572129,7.35593793" id="Fill-20" fill="#231F20" mask="url(#mask-4)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

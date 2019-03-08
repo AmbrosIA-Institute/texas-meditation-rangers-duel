@@ -1,15 +1,24 @@
 import jQuery from 'jquery';
 import bootstrap from 'bootstrap';
+// SVG Graphics
+import './images/headset.svg';
+import './images/player.svg';
+import './images/meter.svg';
+// Fonts
 import './fonts/andalemono/stylesheet.css';
 import './fonts/rtdromotrial/stylesheet.css';
+// CSS Reset
 import './vendor/normalize.css';
+// Main stylesheet
 import './scss/main.scss';
 
+import Game from './js/game';
+
 jQuery(function($){
-  console.log('Ready!');
 
+  
 
-  // Replaces img.src SVG elements with inline
+  // Replaces img.src SVG elements with inline version
   $('img.svg').each(function(){
     var $img = $(this);
     var imgID = $img.attr('id');
@@ -51,10 +60,11 @@ jQuery(function($){
 
     const d = Math.round(v*90);
     const meter = $('.meter-svg');
-    const tr = meter.css('transform');
+
+    /*const tr = meter.css('transform');
     const match = tr.match(/-?[\d\.]+/g);
     const sx = parseFloat(match[0]);
-    const sy = parseFloat(match[3]);
+    const sy = parseFloat(match[3]);*/
 
     const transform = 'rotate(' + d + 'deg) scale(1.2,1.2)';
 
@@ -66,6 +76,12 @@ jQuery(function($){
       'transform'         : transform
     });
 
+  });
+
+  const game = new Game();
+  
+  $('.btn-battle').click(function(e){
+    game.start();
   });
 
 });
