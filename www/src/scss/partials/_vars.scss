@@ -1,15 +1,16 @@
+/** COLORS **/
 $color-black: #000000;
 $color-dark:  #11131D;
 $color-gray:  #9A9A9A;
-
-$color-meter-start: rgba(245,120,50,1);
-$color-meter-end: rgba(152,97,255,1);
-// $color-meter-end: rgba(33,34,255,1);
+$color-player-one: rgba(245,120,50,1);
+$color-player-two: rgba(152,97,255,1);
 
 $meter-scale: 1.2;
 
 $min-viewport-width: 960px;
 $min-viewport-height: 792px;
 
+$player-icon-scale: 1.2;
+$player-status-track-height: 14px;
 
 $font-primary: 'Andale Mono';

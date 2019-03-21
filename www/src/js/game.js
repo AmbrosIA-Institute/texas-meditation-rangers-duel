@@ -5,6 +5,9 @@ import Player from './player';
 // The game instance
 let game = null;
 
+// Holds player objects
+let players = [];
+
 // Default settings
 const defaults = {
 
@@ -25,10 +28,6 @@ export default class Game
     
   }
 
-  static get()
-  {
-    return game;
-  }
 
 
   // Instance constructor
@@ -38,15 +37,37 @@ export default class Game
 
     this.id = id;
     this.element = $('#'+id);
+
     this.config  = $.extend( defaults, config );
 
     // Add listeners
-    this.ui.controls.find('.control-settings').click( this.showSettings );
-    this.ui.settings.find('.settings-close').click( this.hideSettings );
+    this.controls.settings.click( this.showSettings.bind(this) );
+    this.controls.close.click( this.hideSettings.bind(this) );
+
+    // Setup Players
+    for( i=0; i<this.config.players; i++)
+    {
+      let number = i+1;
+      let player = new Player(i, $('.player-'number) );
+      players.push(player);
+    }
+
+    this.players = players;
+
+    // this.ui.settings.find('.settings-close').click( this.hideSettings );
+    this.reset();
 
     console.log('Constructor called');
   }
 
+  reset()
+  {
+    this.controls.time.text('00:00');
+
+    $.each(this.players, function(index,player){
+
+    });
+  }
 
   // Start Battle mode & Timer
   start()
@@ -96,10 +117,21 @@ export default class Game
     return {
       display:  this.element.find('.display'),
       players:  this.element.find('.players'),
-      settings: this.element.find('#settings'),
+      settings: $(this.element).find('#settings'),
       controls: this.element.find('#controls'),
       meter:    this.element.find('#meter'),
       dial:     this.element.find('#meter .dial'),
+    }
+  }
+
+  get controls()
+  {
+    return {
+      settings : this.ui.controls.find('.control-settings'),
+      battle   : this.ui.controls.find('.control-battle'),
+      reset    : this.ui.controls.find('.control-reset'),
+      time     : this.ui.controls.find('.control-time'),
+      close    : this.ui.settings.find('.settings-close'),
     }
   }
 

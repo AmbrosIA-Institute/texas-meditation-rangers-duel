@@ -131,8 +131,7 @@ section#game
       #meter
       {
         z-index: 1;
-
-        background: linear-gradient(90deg, $color-meter-start 0%, $color-meter-end 100%);
+        background: linear-gradient(90deg, $color-player-one 0%, $color-player-two 100%);
 
         h2.meter-title {
           position:absolute;
@@ -153,11 +152,12 @@ section#game
           
           .dial-svg 
           {
-            width:153px;
-            height:349px;
+            width:150px;
+            height:300px;
             background: url(../images/meter.svg);
-            transform: scale($meter-scale,$meter-scale);
-            transform-origin: 76.5px 272px;
+            transform: scale($meter-scale,$meter-scale) rotate(180deg);
+            transform-origin: 75px 225px;
+
           }
 
         }
@@ -176,7 +176,6 @@ section#game
 
     .player {
       height:100%;
-      // border:1px solid white;
       padding:2rem;
       display:flex;
       flex-direction: column;
@@ -194,22 +193,35 @@ section#game
         display:inline-block;
       }
 
-      .player-score {
-        .player-score-value {
-          font-size:2rem;
-          border-bottom:2px solid;
+      .player-icon {
+        transform: scale($player-icon-scale,$player-icon-scale);
+      }
+      .player-score 
+      {
+        margin:0 1rem;
+
+        .player-score-value 
+        {
+          font-size:3rem;
           display:block;
-          padding-bottom:2px;
           text-align: center;
         }
-        .player-score-label {
-          font-size:0.3rem;
+
+        .player-score-label 
+        {
+          font-size:0.4rem;
+          letter-spacing: 1px;
+          text-align: center;
+          display:block;
+          border-top:1px solid;
+          padding-top:0.5rem;
           text-transform:uppercase;
         }
       }
 
       .player-actions 
       {
+        display:none;
         margin:0 1rem;
 
         button {
@@ -231,23 +243,22 @@ section#game
       }
     }
 
-
     .player-status 
     {
       width:100%;
       box-sizing:border-box;
       padding-right:1rem;
+      position: relative;
 
       .player-status-track {
-        width:100%;
-        height:24px;
-        border:1px solid;
+        width: 100%;
+        height: $player-status-track-height;
+        border: 1px solid;
         position: relative;
 
         .player-status-track-fill {
           width:25%;
           height:100%;
-          
         }
 
         .player-status-goal {
@@ -255,13 +266,20 @@ section#game
           width:2px;
           right:25%;
           top:0; bottom:0;
-         
         }
       }
 
-      .player-status-label {
+      .player-status-label, .player-status-label-goal {
         margin:0.5rem 0;
+        font-size: 0.3rem;
         text-transform:uppercase;
+      }
+
+      .player-status-label-goal {
+        position:absolute;
+        top: $player-status-track-height;
+        right:25%;
+        transform: translateX(50%);
       }
     }
 
@@ -324,7 +342,7 @@ section#game
     }
 
     .player-1 {
-      color:$color-meter-start;
+      color:$color-player-one;
     }
     
     .player-1 
@@ -335,15 +353,15 @@ section#game
         {
           path.head 
           {
-            fill:$color-meter-start;
+            fill:$color-player-one;
           }
         }
 
         .player-actions 
         {
           button {
-            border-color:$color-meter-start;
-            color:$color-meter-start;
+            border-color:$color-player-one;
+            color:$color-player-one;
           }
         }
       }
@@ -352,7 +370,7 @@ section#game
       {
         .player-status-track-fill,
         .player-status-goal {
-          background-color:$color-meter-start;
+          background-color:$color-player-one;
         }
       }
       
@@ -362,7 +380,7 @@ section#game
         .fr .icon-headset path.front-right,
         .bl .icon-headset path.back-left,
         .br .icon-headset path.back-right {
-          stroke: $color-meter-start;
+          stroke: $color-player-one;
         }
       }
       
@@ -370,7 +388,7 @@ section#game
 
     .player-2 {
       right:0;
-      color:$color-meter-end;
+      color:$color-player-two;
     }
 
     .player-2 
@@ -378,20 +396,21 @@ section#game
       .player-detail
       {
         flex-direction: row-reverse;
+
         .player-icon 
         {
-          transform: scaleX(-1);
+          transform: scale(-$player-icon-scale, $player-icon-scale );
           path.head 
           {
-            fill:$color-meter-end;
+            fill:$color-player-two;
           }
         }
 
         .player-actions 
         {
           button {
-            border-color:$color-meter-end;
-            color:$color-meter-end;
+            border-color:$color-player-two;
+            color:$color-player-two;
           }
         }
       }
@@ -400,7 +419,7 @@ section#game
       {
         .player-status-track-fill,
         .player-status-goal {
-          background-color:$color-meter-end;
+          background-color:$color-player-two;
         }
       }
       
@@ -410,7 +429,7 @@ section#game
         .fr .icon-headset path.front-right,
         .bl .icon-headset path.back-left,
         .br .icon-headset path.back-right {
-          stroke: $color-meter-end;
+          stroke: $color-player-two;
         }
       }
       
