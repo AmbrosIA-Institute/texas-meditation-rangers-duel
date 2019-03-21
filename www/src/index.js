@@ -20,10 +20,12 @@ jQuery(function($){
   // Replaces SVG images with inline XML
   $('img.svg').each(SVGConvert);
 
-  Game.init();
+  const config = {};
 
+  // Initialize Game UI
+  Game.init( 'game', config );
 
-
+  // 
   $('.display').on('mousemove', function(e){
 
     let wh   = $(this).outerWidth() / 2;
