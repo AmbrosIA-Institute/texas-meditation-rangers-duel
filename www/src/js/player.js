@@ -10,7 +10,8 @@ export default class Player
 		this.element = $( 'player-' + this.number );
 	}
 
-	get ui {
+	get ui() 
+	{
 		return {
 			detail:    this.element.find('.player-detail'),
 			icon:      this.element.find('.player-icon'),

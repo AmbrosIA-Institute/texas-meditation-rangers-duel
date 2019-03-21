@@ -45,10 +45,10 @@ export default class Game
     this.controls.close.click( this.hideSettings.bind(this) );
 
     // Setup Players
-    for( i=0; i<this.config.players; i++)
+    for( let i=0; i<this.config.players; i++ )
     {
       let number = i+1;
-      let player = new Player(i, $('.player-'number) );
+      let player = new Player(i, $('.player-' + number) );
       players.push(player);
     }
 

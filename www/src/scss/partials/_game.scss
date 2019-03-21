@@ -168,210 +168,27 @@ section#game
 
   }
 
-  .players {
+  .players 
+  {
     position:absolute;
     top:50%;
     width:100%;
     height:50%;
 
-    .player {
-      height:100%;
-      padding:2rem;
-      display:flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .player-detail 
-    {
-      display:flex;
-      justify-content: flex-start;
-      align-items: center;
-
-      .player-icon, .player-score, .player-actions
-      {
-        display:inline-block;
-      }
-
-      .player-icon {
-        transform: scale($player-icon-scale,$player-icon-scale);
-      }
-      .player-score 
-      {
-        margin:0 1rem;
-
-        .player-score-value 
-        {
-          font-size:3rem;
-          display:block;
-          text-align: center;
-        }
-
-        .player-score-label 
-        {
-          font-size:0.4rem;
-          letter-spacing: 1px;
-          text-align: center;
-          display:block;
-          border-top:1px solid;
-          padding-top:0.5rem;
-          text-transform:uppercase;
-        }
-      }
-
-      .player-actions 
-      {
-        display:none;
-        margin:0 1rem;
-
-        button {
-          background:none;
-          color:white;
-          padding:5px 10px;
-          font-size:0.8rem;
-          text-transform:uppercase;
-          border-radius:4px;
-          line-height: 0.7rem;
-          transition:all 200ms ease-out;
-
-          &:hover {
-            border-color:white !important;
-            color:white !important;
-            cursor: pointer;
-          }
-        }
-      }
-    }
-
-    .player-status 
-    {
-      width:100%;
-      box-sizing:border-box;
-      padding-right:1rem;
-      position: relative;
-
-      .player-status-track {
-        width: 100%;
-        height: $player-status-track-height;
-        border: 1px solid;
-        position: relative;
-
-        .player-status-track-fill {
-          width:25%;
-          height:100%;
-        }
-
-        .player-status-goal {
-          position:absolute;
-          width:2px;
-          right:25%;
-          top:0; bottom:0;
-        }
-      }
-
-      .player-status-label, .player-status-label-goal {
-        margin:0.5rem 0;
-        font-size: 0.3rem;
-        text-transform:uppercase;
-      }
-
-      .player-status-label-goal {
-        position:absolute;
-        top: $player-status-track-height;
-        right:25%;
-        transform: translateX(50%);
-      }
-    }
+    @import 'player';
 
 
-    .player-feedback
-    {
-      height:50%;
-      position:relative;
-      
-      .fl { top:0; left:0; }
-      .fr { top:0; right:0; }
-      .bl { bottom:0; left:0; }
-      .br { bottom:0; right:0; }
-
-      .fl,.fr,.bl,.br 
-      {
-        width:50%;
-        height:50%;
-        position:absolute;
-        display:flex;
-
-        .icon-headset {
-
-          path {
-            stroke: #666;
-
-            &.pad {
-              fill:#666;
-            }
-          }
-
-          span {
-            display:block;
-            font-size:0.6rem;
-            color:#666;
-            text-transform:uppercase;
-          }
-        }
-
-        .fft {
-          height:75%;
-          flex:1;
-          border:1px solid;
-          margin:0 1rem;
-          border-radius:0.5rem;
-          background-color:#222;
-          overflow:hidden;
-        }
-      }
-
-      
-    }
-
-    .player-1, .player-2 
-    {
-      position:absolute;
-      width:50%;
-      height:100%;
-      box-sizing:border-box;
-    }
-
-    .player-1 {
-      color:$color-player-one;
-    }
-    
     .player-1 
     {
-      .player-detail
-      {
-        .player-icon 
-        {
-          path.head 
-          {
-            fill:$color-player-one;
-          }
-        }
+      color:$color-player-one;
 
-        .player-actions 
-        {
-          button {
-            border-color:$color-player-one;
-            color:$color-player-one;
-          }
-        }
-      }
-
-      .player-status
+      .player-detail .player-icon path.head,
+      .player-status .player-status-track-fill,
+      .player-status .player-status-goal,
       {
-        .player-status-track-fill,
-        .player-status-goal {
-          background-color:$color-player-one;
-        }
+        fill:$color-player-one;
+        color:$color-player-one;
+        background-color:$color-player-one;
       }
       
       .player-feedback 
@@ -383,44 +200,20 @@ section#game
           stroke: $color-player-one;
         }
       }
-      
-    }
-
-    .player-2 {
-      right:0;
-      color:$color-player-two;
     }
 
     .player-2 
     {
-      .player-detail
+      right:0;
+      color:$color-player-two;
+
+      .player-detail .player-icon path.head,
+      .player-status .player-status-track-fill,
+      .player-status .player-status-goal,
       {
-        flex-direction: row-reverse;
-
-        .player-icon 
-        {
-          transform: scale(-$player-icon-scale, $player-icon-scale );
-          path.head 
-          {
-            fill:$color-player-two;
-          }
-        }
-
-        .player-actions 
-        {
-          button {
-            border-color:$color-player-two;
-            color:$color-player-two;
-          }
-        }
-      }
-
-      .player-status
-      {
-        .player-status-track-fill,
-        .player-status-goal {
-          background-color:$color-player-two;
-        }
+        fill:$color-player-two;
+        color:$color-player-two;
+        background-color:$color-player-two;
       }
       
       .player-feedback 
@@ -430,6 +223,16 @@ section#game
         .bl .icon-headset path.back-left,
         .br .icon-headset path.back-right {
           stroke: $color-player-two;
+        }
+      }
+
+      .player-detail
+      {
+        flex-direction: row-reverse;
+
+        .player-icon 
+        {
+          transform: scale(-$player-icon-scale, $player-icon-scale );
         }
       }
       
