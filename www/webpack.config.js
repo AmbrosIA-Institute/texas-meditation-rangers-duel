@@ -43,7 +43,7 @@ module.exports = {
         test: /\.(png|jpg|gif)$/,
         loader: "url-loader",
       }, 
-
+      // Handle SVG files
       {
        test: /\.svg$/,
        use: [{

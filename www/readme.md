@@ -20,15 +20,22 @@ Don't commit contents of 'dist' directory
 A browser window should open in http://localhost:3000 
 
 ### Other Commands
-Run dev build without watching
+Run dev build without reload
 ```sh
 $ npm run dev
+```
 
 Build production files
 ```sh
 $ npm run build
 ```
-Start the server (without opening browser) and watch scss files
+
+Run webpack (default config)
+```sh
+$ npm run webpack
+```
+
+Start the server and watch scss files
 ```sh
 $ npm run start
 ```
