@@ -4,6 +4,8 @@ import bootstrap from 'bootstrap';
 import './images/headset.svg';
 import './images/player.svg';
 import './images/meter.svg';
+import './images/battery.svg';
+
 // Fonts
 import './fonts/andalemono/stylesheet.css';
 import './fonts/rtdromotrial/stylesheet.css';

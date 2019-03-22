@@ -26,11 +26,36 @@
             <h2 class="settings-title">Settings</h2>
             
             <div class="settings">
-              <div class="setting">
+              <div class="setting setting-connect">
                 <h3>Connect</h3>
+                <div class="setting-connect-players">
+                  <button class="player-1">Player 01</button>
+                  <button class="player-2">Player 02</button>
+                </div>
               </div>
-              <div class="setting">
+              <div class="setting setting-battery">
                 <h3>Battery</h3>
+                <div class="setting-battery-players">
+                  <div class="player-1 battery-full">
+                    <span class="battery-percent">48%</span>
+                    <img src="dist/images/battery.svg" class="svg"/>
+                  </div>
+                  <div class="player-2 battery-empty">
+                    <span class="battery-percent">48%</span>
+                    <img src="dist/images/battery.svg" class="svg"/>
+                  </div>
+        
+                </div>
+              </div>
+              <div class="setting setting-duration">
+                <h3>Ballle Duration</h3>
+                <select id="battle-duration">
+                  <option value="1">01:00</option>
+                  <option value="2">02:00</option>
+                  <option value="3">03:00</option>
+                  <option value="4">04:00</option>
+                  <option value="5">05:00</option>
+                </select>
               </div>
             </div>
           </div>

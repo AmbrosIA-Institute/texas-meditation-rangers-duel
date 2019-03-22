@@ -71,7 +71,7 @@
   }
 
   .player-status 
-{
+  {
   width:100%;
   box-sizing:border-box;
   padding-right:1rem;
@@ -149,11 +149,13 @@
     .fft {
       height:75%;
       flex:1;
-      border:1px solid;
+      border:2px solid;
       margin:0 1rem;
       border-radius:0.5rem;
       background-color:#222;
       overflow:hidden;
+
+
     }
   }
 

@@ -28,8 +28,6 @@ export default class Game
     
   }
 
-
-
   // Instance constructor
   constructor( id, config )
   {
@@ -43,13 +41,12 @@ export default class Game
     // Add listeners
     this.controls.settings.click( this.showSettings.bind(this) );
     this.controls.close.click( this.hideSettings.bind(this) );
+    this.controls.battle.click( this.startBattle.bind(this) );
 
     // Setup Players
     for( let i=0; i<this.config.players; i++ )
     {
-      let number = i+1;
-      let player = new Player(i, $('.player-' + number) );
-      players.push(player);
+      players.push(new Player(i));
     }
 
     this.players = players;
@@ -72,28 +69,13 @@ export default class Game
   // Start Battle mode & Timer
   start()
   {
-
-
-
-    this.startTimer();
-
+    // this.startTimer();
     $.each(this.players, function(index,player){
-      
-      if( ! player.isReady() ) return false;
-
       player.startStream();
-
-
-      let player = $(p);
-      let ffts = $(player).find('.fft');
-      let config = { channels : 1 };
-
-
-      $.each(ffts, function(j,fft){
-         const pfft = new FFT(fft, config);
-         pfft.start();
-      });
     });
+
+    this.is_playing = true;
+    this.is_paused  = false;
   }
 
   pause()
@@ -106,19 +88,34 @@ export default class Game
 
   }
 
-  onGameEnded()
+  startBattle()
   {
-
+    this.start();
   }
 
   showSettings()
   {
     this.ui.settings.addClass('open');
+    this.refreshSettings();
   }
 
   hideSettings()
   {
     this.ui.settings.removeClass('open');
+  }
+
+
+  refreshSettings()
+  {
+    let connect = this.ui.settings.find('.setting-connect');
+    let conn_players = connect.find('.setting-connect-players');
+
+    let battery = this.ui.settings.find('.setting-battery');
+    let batt_players = battery.find('.setting-battery-players');
+
+    $.each(this.players, function(i,p){
+
+    });
   }
 
   // UI elements

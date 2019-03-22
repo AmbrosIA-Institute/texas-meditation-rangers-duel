@@ -1,4 +1,133 @@
-section#settings 
+#settings 
 {
-  display:none;
+  z-index: 3;
+  background:$color-dark;
+  padding:24px 72px;
+  display: flex;
+  flex-direction: column;
+  transition: all 300ms ease-out;
+  transform: translateY(-100%);
+
+  &.open {
+    transform: translateY(0);
+  }
+
+  h2.settings-title {
+    color:$color-gray;
+  }
+
+  .settings-close {
+    position: absolute;
+    top:32px;
+    right:72px;
+    color:$color-gray;
+    font-weight: 100;
+    font-size:3rem;
+    transition: all 200ms ease-out;
+
+    &:before 
+    {
+      content: "\00d7";            
+    }
+
+    &:hover {
+      color:white;
+      cursor: pointer;
+      transform: rotate(90deg);
+    }
+  }
+
+  .settings {
+    width:100%;
+    display:flex;
+  }
+
+  .setting 
+  {
+    display: inline-block;
+    height:100px;
+    width:25%;
+    margin:0;
+
+    h3 {
+      color:$color-gray;
+    }
+  }
+
+
+  .setting-battery 
+  {
+    color:white;
+
+    .setting-battery-players {
+      
+       display:flex;
+       flex-direction: column;
+
+       .battery-percent {
+        font-size:1.6rem;
+       }
+
+       .player-1, .player-2 
+       {
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+       }
+    }
+
+    .battery-percent {
+
+    }
+
+
+    .battery-border {
+      stroke: #FFFFFF;
+      fill: none;
+    }
+
+    .battery-tip {
+      stroke: #FFFFFF;
+      fill: #FFFFFF;
+    }
+
+    .battery-level {
+      fill: #FFFFFF;
+      stroke:none;
+    }
+
+    .battery-full {
+      g.battery-full { display:inline; }
+      g.battery-half, g.battery-empty { display:none; }
+      rect.battery-level {
+        fill: #22DD22;
+      }
+    }
+
+    .battery-half {
+      g.battery-half { display:inline; }
+      g.battery-full, g.battery-empty { display:none; }
+      rect.battery-level {
+        fill: #DDDD22;
+      }
+    }
+
+    .battery-empty {
+      g.battery-empty { display:inline; }
+      g.battery-full, g.battery-half { display:none; }
+      rect.battery-level {
+        fill: #DD2222;
+      }
+    }
+  }
+
+  .setting-duration 
+  {
+    select {
+      background:$color-gray;
+      color:$color-black;
+      font-size:1.6rem;
+      padding:0.5rem;
+    }
+  }
 }
