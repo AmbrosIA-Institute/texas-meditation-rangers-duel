@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="64px" height="32px" viewBox="0 12 64 32" enable-background="new 0 0 64 64" xml:space="preserve">
-	<g id="Layer_1" class="battery-empty">
-		<rect class="battery-border" x="9.335" y="17.337" display="inline" fill="none" stroke="#000000" stroke-width="3" stroke-miterlimit="10" width="45.557" height="23.467"/>
-		<rect class="battery-tip" x="56.27" y="25.097" display="inline" width="2.503" height="7.947"/>
-		<rect class="battery-level" x="12.215" y="20.09" display="inline" width="2.503" height="18.148"/>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="64px"
+	 height="32px" viewBox="0 0 64 32" enable-background="new 0 0 64 32" xml:space="preserve">
+<g id="BatteryLow" display="none">
+	<g display="inline">
+		<g>
+			<path class="battery-body" d="M57.299,30.798H3V1.202h54.299V30.798z M6.354,27.443h47.589V4.556H6.354V27.443z"/>
+		</g>
+		<rect class="battery-terminal" x="57.162" y="11.556" width="3.848" height="8.887"/>
+		<rect class="battery-level" x="9.837" y="7.594" width="13.109" height="17.02"/>
 	</g>
-	<g id="Layer_2" class="battery-half">
-		<rect class="battery-border" x="9.335" y="17.337" display="inline" fill="none" stroke="#000000" stroke-width="3" stroke-miterlimit="10" width="45.557" height="23.467"/>
-		<rect class="battery-tip" x="56.27" y="25.097" display="inline" width="2.503" height="7.947"/>
-		<rect class="battery-level" x="12.215" y="20.09" display="inline" width="20.587" height="18.148"/>
+</g>
+<g id="BatteryMed" display="none">
+	<g display="inline">
+		<g>
+			<path class="battery-body" d="M57.299,30.798H3V1.202h54.299V30.798z M6.354,27.443h47.589V4.556H6.354V27.443z"/>
+		</g>
+		<rect class="battery-terminal" x="57.162" y="11.556" width="3.848" height="8.887"/>
+		<rect class="battery-level" x="9.837" y="7.594" width="26.218" height="17.02"/>
 	</g>
-	<g id="Layer_3" class="battery-full">
-		<rect class="battery-border" x="9.335" y="17.337" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-miterlimit="10" width="45.557" height="23.467"/>
-		<rect class="battery-tip" x="56.27" y="25.097" width="2.503" height="7.947"/>
-		<rect class="battery-level" x="12.215" y="20.09" width="39.549" height="18.148"/>
+</g>
+<g id="BatteryHigh">
+	<g>
+		<g>
+			<path class="battery-body" d="M57.299,30.798H3V1.202h54.299V30.798z M6.354,27.443h47.589V4.556H6.354V27.443z"/>
+		</g>
+		<rect class="battery-terminal" x="57.162" y="11.556" width="3.848" height="8.887"/>
+		<rect class="battery-level" x="9.837" y="7.594" width="40.361" height="17.02"/>
 	</g>
+</g>
 </svg>
