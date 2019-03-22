@@ -65,15 +65,25 @@ export default class Game
     this.controls.time.text('00:00');
 
     $.each(this.players, function(index,player){
-
+      player.reset();
     });
   }
 
   // Start Battle mode & Timer
   start()
   {
-    $.each(['.player-1','.player-2'], function(i,p){
+
+
+
+    this.startTimer();
+
+    $.each(this.players, function(index,player){
       
+      if( ! player.isReady() ) return false;
+
+      player.startStream();
+
+
       let player = $(p);
       let ffts = $(player).find('.fft');
       let config = { channels : 1 };

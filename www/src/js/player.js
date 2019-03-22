@@ -6,8 +6,16 @@ export default class Player
 	constructor( index )
 	{	
 		this.index  = index;
-		this.nubmer = index + 1;
-		this.element = $( 'player-' + this.number );
+		this.number = index + 1;
+		this.element = $( '.player-' + this.number );
+
+		console.log('player',this.number,this.element);
+	}
+
+	reset()
+	{
+		console.log('reset',this.ui.score);
+		this.score = 0;
 	}
 
 	get ui() 
@@ -25,8 +33,9 @@ export default class Player
 	}
 
 	set score(n)
-	{
-
+	{	
+		let s = n.toString().padStart(4, '0');
+		this.ui.score.text(s);
 	}
 
 }
