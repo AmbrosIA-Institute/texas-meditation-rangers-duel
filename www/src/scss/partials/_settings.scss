@@ -16,7 +16,8 @@
     color:$color-gray;
   }
 
-  .settings-close {
+  .settings-close 
+  {
     position: absolute;
     top:32px;
     right:72px;
@@ -39,84 +40,85 @@
 
   .settings {
     width:100%;
+    height:100%;
     display:flex;
+    outline:3px solid red;
   }
 
   .setting 
   {
-    display: inline-block;
-    height:100px;
+    display:block;
+    height:100%;
     width:25%;
     margin:0;
+    outline:1px solid lightgreen;
 
     h3 {
       color:$color-gray;
+      border:1px solid white;
+    }
+  
+    .players 
+    {
+      color:white;
+      display:block;
+      position:static;
+      border:1px solid orange;
+
+      .player 
+      {
+        border:1px solid pink;
+      }
+    }
+    
+    
+  }
+  
+  .setting-connect 
+  {
+    color:white;
+
+    .player button {
+        display:block;
+        width:150px;
+        background:none;
+        border:3px solid white;
+        color:white;
+        padding:0.5rem;
+        margin:2rem 0;
     }
   }
-
 
   .setting-battery 
   {
     color:white;
 
-    .setting-battery-players {
-      
-       display:flex;
-       flex-direction: column;
-
-       .battery-percent {
-        font-size:1.6rem;
-       }
-
-       .player-1, .player-2 
+    .players 
+    {
+       .battery-percent 
        {
-        display:flex;
-        flex-direction: row;
-        align-items: center;
+        font-size:1.6rem;
+        margin-right:1rem;
        }
     }
 
-    .battery-percent {
-
-    }
-
-
-    .battery-border {
-      stroke: #FFFFFF;
-      fill: none;
-    }
-
-    .battery-tip {
-      stroke: #FFFFFF;
+    .battery-body, .battery-terminal, .battery-level {
       fill: #FFFFFF;
     }
 
-    .battery-level {
-      fill: #FFFFFF;
-      stroke:none;
-    }
+    //#BatteryHigh rect.battery-level { fill: lighten($color-green, 20%); }
+    //#BatteryMed  rect.battery-level { fill: $color-yellow; }
+    //#BatteryLow  rect.battery-level { fill: $color-red; }
 
-    .battery-full {
-      g.battery-full { display:inline; }
-      g.battery-half, g.battery-empty { display:none; }
-      rect.battery-level {
-        fill: #22DD22;
+    .player-1 { 
+      .battery-body, .battery-terminal {
+        fill:$color-player-one;
       }
     }
 
-    .battery-half {
-      g.battery-half { display:inline; }
-      g.battery-full, g.battery-empty { display:none; }
-      rect.battery-level {
-        fill: #DDDD22;
-      }
-    }
-
-    .battery-empty {
-      g.battery-empty { display:inline; }
-      g.battery-full, g.battery-half { display:none; }
-      rect.battery-level {
-        fill: #DD2222;
+    .player-2 { 
+      .battery-body, .battery-terminal {
+        fill:$color-player-two;
       }
     }
   }
