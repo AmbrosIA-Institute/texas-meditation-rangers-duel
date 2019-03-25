@@ -15,12 +15,21 @@
 <body>
   
   <div id="viewport">
-
+    <div id="modal">
+      <div class="countdown">
+        <img src="dist/images/stopwatch.svg" class="svg" />
+        <span class="text"></span>
+      </div>
+      <hr/>
+      <h3 class="word"></h3>
+    </div>
     <section id="game">
 
       <div class="display">
 
         <div id="window">
+
+          <div id="glow"></div>
           <div id="settings">
             
             <span class="settings-close"></span>
@@ -46,13 +55,19 @@
               <div class="setting setting-battery">
                 <h3>Battery</h3>
                 <div class="players setting-battery-players">
-                  <div class="player player-1 battery-full">
+                  <div class="player player-1">
                     <h4 class="battery-percent">48%</h4>
-                    <img src="dist/images/battery.svg" class="svg"/>
+                    <div class="battery">
+                      <div class="battery-b"><div class="battery-f"></div></div>
+                      <div class="battery-t"></div>
+                    </div>
                   </div>
-                  <div class="player player-2 battery-empty">
+                  <div class="player player-2">
                     <h4 class="battery-percent">48%</h4>
-                    <img src="dist/images/battery.svg" class="svg"/>
+                    <div class="battery">
+                      <div class="battery-b"><div class="battery-f"></div></div>
+                      <div class="battery-t"></div>
+                    </div>
                   </div>
         
                 </div>
@@ -60,21 +75,25 @@
 
               <div class="setting setting-duration">
                 <h3>Battle Duration</h3>
-                <select id="battle-duration">
-                  <option value="1">01:00</option>
-                  <option value="2">02:00</option>
-                  <option value="3">03:00</option>
-                  <option value="4">04:00</option>
-                  <option value="5">05:00</option>
-                </select>
+                <div class="setting-input">
+                  <select id="battle-duration">
+                    <option value="30">00:30</option>
+                    <option value="60">01:00</option>
+                    <option value="120">02:00</option>
+                    <option value="180">03:00</option>
+                    <option value="240">04:00</option>
+                    <option value="300">05:00</option>
+                  </select>
+                </div>
               </div>
 
               <div class="setting setting-mode">
                 <h3>Battle Mode</h3>
                 <ul class="mode-list">
-                  <li><button data-mode="traffic">Traffic</button></li>
-                  <li><button data-mode="kids">Kids</button></li>
-                  <li><button data-mode="office">Office</button></li>
+                  <li data-mode="none"><button>None</button></li>
+                  <li data-mode="traffic"><button>Traffic</button></li>
+                  <li data-mode="kids"><button>Kids</button></li>
+                  <li data-mode="office"><button>Office</button></li>
                 </ul>
               </div>
 
@@ -100,6 +119,12 @@
               <div class="dial-svg"></div>
             </div>
           </div>
+          
+          <div id="output">
+            <h2 class="countdown"></h2>
+            <h2 class="error">This is an Error</h2>
+          </div>
+
         </div>
         
       </div>

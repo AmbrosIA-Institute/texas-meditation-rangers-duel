@@ -19,8 +19,21 @@ section#game
       position:relative;
       width:100%;
       height:100%;
+      background: linear-gradient(90deg, $color-player-one 0%, $color-player-two 100%);
 
-      #settings, #controls, #meter 
+      #glow {
+        position: absolute;
+        top:0; left:0; right:0; bottom:0;
+        z-index:10;
+        box-shadow:  inset 0 0 150px 20px #FFFFFF;
+        mix-blend-mode: color-dodge;
+        mix-blend-mode: overlay;
+        pointer-events: none;
+        opacity:0;
+        transition: all 500ms ease-out;
+      }
+
+      #settings, #controls, #meter, #output 
       {
         position: absolute;
         top:0; left:0; right:0; bottom:0;
@@ -28,90 +41,48 @@ section#game
       }
 
       @import 'settings';
+      @import 'controls';
+      @import 'meter';
 
-      #controls
+      #output 
       {
-        // mix-blend-mode: multiply;
-        z-index: 2;
-        // mix-blend-mode: multiply;
-        .controls-left, .controls-right {
-          width:50%;
-          padding:24px 72px;
-
-        }
-
-        .controls-right {
-          text-align: right;
-        }
-
-        button {
-          background:none;
-          display: inline-block;
-          border:3px solid $color-black;
-          width:150px;
-          height:32px;
-          text-align: center;
-          text-transform: uppercase;
-          font-weight: bolder;
-          font-size:0.9rem;
-          letter-spacing: 1px;
-          border-radius: 3px;
-          transition: all 200ms ease-out;
-
-        }
-
-        button.control-time, button.control-battle {
-          background:$color-black;
-          color:white;
-        }
-
-        button:hover {
-          cursor: pointer;
-          color:white;
-          border-color:white;
-        }
-
-
-      }
-
-      #meter
-      {
-        z-index: 1;
-        background: linear-gradient(90deg, $color-player-one 0%, $color-player-two 100%);
-
-        h2.meter-title {
+        h2 {
           position:absolute;
           left:50%;
-          top:50%;
-          transform:translate(-50%,-50%);
-          font-weight:200;
-          text-transform:uppercase;
-          font-size:2rem;
+          transform: translateX(-50%);
         }
 
-        .dial 
+        h2.countdown 
         {
-          position:absolute;
-          left:50%;
-          bottom:-75px;
-          transform:translate(-50%,0);
-          
-          .dial-svg 
-          {
-            width:150px;
-            height:300px;
-            background: url(../images/meter.svg);
-            transform: scale($meter-scale,$meter-scale) rotate(180deg);
-            transform-origin: 75px 225px;
+          font-size: 8rem;
+          font-weight: 700;
+          font-family: $font-secondary;
+          color:white;
+          opacity:0.7;
+          mix-blend-mode: screen;
+          width:100%;
+          text-align:center;
+        }
 
-          }
-
+        h2.error {
+          top:46%;
+          color:darken($color-red, 20%);
+          font-size:2rem;
+          font-weight: 200;
+          opacity:0;
         }
       }
-
-
+    
     }
 
+  }
+
+  &.is-playing {
+    .display {
+      #window #glow {
+        opacity:1;
+      }
+    }
   }
 
   #players 

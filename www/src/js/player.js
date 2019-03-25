@@ -13,12 +13,12 @@ export default class Player
 
 		this.element = $( '.player-' + this.number );
 
-		console.log('player',this.number,this.element);
+		//console.log('player',this.number,this.element);
 	}
 
 	reset()
 	{
-		console.log('reset',this.ui.score);
+		//console.log('reset',this.ui.score);
 
 		// Current Meditation Score 
 		this.status = this._status = 0;
@@ -32,7 +32,7 @@ export default class Player
 	{
 		this.startFFT();
 
-		console.log('Player', this.number, 'Start');
+		//console.log('Player', this.number, 'Start');
 	}
 
 
@@ -45,7 +45,7 @@ export default class Player
 			   pfft.start();
 			});
 
-			console.log('FFTS',this.ffts);
+			//console.log('FFTS',this.ffts);
 	}
 
 	get ui() 

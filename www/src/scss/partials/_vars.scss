@@ -1,21 +1,28 @@
 /** COLORS **/
-$color-black: #000000;
-$color-dark:  #11131D;
-$color-gray:  #9A9A9A;
-$color-green: green;
-$color-yellow: yellow;
-$color-red:    red;
+$color-black:   #000000;
+$color-white:   #FFFFFF;
+$color-dark:    #11131D;
+$color-light:   #F2F2F2;
+$color-gray:    #9A9A9A;
+$color-green:   green;
+$color-yellow:  yellow;
+$color-red:     red;
 
-
+// Player colors
 $color-player-one: rgba(245,120,50,1);
 $color-player-two: rgba(152,97,255,1);
 
+// Relative scale for dial
 $meter-scale: 1.2;
 
+// View size constraints
 $min-viewport-width: 960px;
 $min-viewport-height: 792px;
 
-$player-icon-scale: 1.2;
+// Player specific vars
+$player-icon-scale: 1.6;
 $player-status-track-height: 14px;
 
+// Fonts
 $font-primary: 'Andale Mono';
+$font-secondary: 'RT Dromo Trial';

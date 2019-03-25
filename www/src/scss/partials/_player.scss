@@ -3,7 +3,7 @@
   position:absolute;
   height:100%;
   width:50%;
-  padding:2rem;
+  padding:2rem 4rem;
   display:flex;
   flex-direction: column;
   justify-content: space-between;
@@ -23,13 +23,14 @@
     .player-icon {
       transform: scale($player-icon-scale,$player-icon-scale);
     }
+
     .player-score 
     {
-      margin:0 1rem;
+      margin:0 2rem;
 
       .player-score-value 
       {
-        font-size:3rem;
+        font-size:4rem;
         display:block;
         text-align: center;
       }

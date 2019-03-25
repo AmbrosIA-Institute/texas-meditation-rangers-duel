@@ -1,0 +1,44 @@
+#meter
+{
+  z-index: 1;
+
+  h2.meter-title {
+    position:absolute;
+    left:50%;
+    top:60%;
+    transform:translate(-50%,-50%);
+    font-weight:200;
+    text-transform:uppercase;
+    font-size:2rem;
+  }
+
+  .dial 
+  {
+    position:absolute;
+    left:50%;
+    bottom:-75px;
+    transform:translate(-50%,0);
+    
+    .dial-svg 
+    {
+      width:150px;
+      height:300px;
+      background: url(../images/meter.svg);
+      transform: scale($meter-scale,$meter-scale) rotate(180deg);
+      transform-origin: 75px 225px;
+      transition: all 500ms ease-out;
+    }
+
+  }
+
+  &.show
+  {
+    .dial 
+    {
+      .dial-svg
+      {
+        transform: scale($meter-scale,$meter-scale) rotate(0deg);
+      }
+    }
+  }
+}

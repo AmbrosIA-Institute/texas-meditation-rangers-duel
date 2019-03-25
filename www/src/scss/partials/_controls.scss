@@ -1,0 +1,65 @@
+#controls
+{
+  // mix-blend-mode: multiply;
+  z-index: 2;
+  // mix-blend-mode: multiply;
+  .controls-left, .controls-right {
+    width:50%;
+    padding:24px 72px;
+
+  }
+
+  .controls-right {
+    text-align: right;
+  }
+
+  button {
+    background:none;
+    display: inline-block;
+    border:3px solid $color-black;
+    width:150px;
+    height:32px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-size:0.9rem;
+    letter-spacing: 1px;
+    border-radius: 3px;
+    transition: all 200ms ease-out;
+    
+    &.disabled {
+      color:black;
+      opacity:0.4;
+    }
+    
+    // Remove default blue outline by browsers
+    &:focus{
+      outline:none;
+    }
+
+    &:hover {
+
+      &:not(.disabled)
+      {
+        cursor: pointer;
+        color:$color-white;
+        border-color:$color-white;
+      }
+    }
+  }
+
+  button.control-time, button.control-battle {
+    background:$color-black;
+    color:$color-white;
+  }
+
+  button.control-time:hover {
+    cursor:inherit;
+    border-color:$color-black;
+  }
+
+  button.control-time:focus {
+    outline:none;
+  }
+
+}
