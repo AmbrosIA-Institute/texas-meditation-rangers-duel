@@ -15,7 +15,7 @@ const defaults = {
   players: 2, 
 
   // Battle duration, in seconds
-  duration: 5,
+  duration: 10,
 
   // Game mode
   mode: 'none',
@@ -25,6 +25,12 @@ const defaults = {
 
   // Type of countdown
   cdtype: 'modal',
+
+  // Game display ratio
+  ratio: 1,
+
+  // Starting width
+  width: 1024,
 }
 
 const disable = function(element){
@@ -66,10 +72,21 @@ export default class Game
 
     // The id to attach to
     this.id = id;
+
     // Root element
     this.element = $('#'+id);
+
     // Game config
     this.config  = $.extend( defaults, config );
+
+    // Viewport size
+    this.width  = this.element.outerWidth();
+    this.height = this.element.outerHeight();
+
+    // Size the game window to the view
+    this.resizeFrame();
+
+    $(window).resize(this.resizeFrame.bind(this));
 
     // Intialize control buttons
     this.initControls();
@@ -88,7 +105,24 @@ export default class Game
     // this.ui.settings.find('.settings-close').click( this.hideSettings );
     this.reset();
 
+
+    console.log(this.width, this.height);
     console.log('Ready to Battle');
+  }
+
+  // Resize the game to fit the game ratio within the device/browser window
+  // Attached to $(window).resize()
+  resizeFrame()
+  {
+    const ww = $(window).width();
+    const wh = $(window).height();
+    const r  = this.width/this.height;
+    const scale = (ww/wh) > r ? wh/this.height : ww/this.width;
+    const transform = 'translate(-50%,-50%) scale('+scale+')';
+    
+    $('#viewport').css('transform', transform);    
+
+    // console.log('resize',ww,wh,o,scale);
   }
 
   // Reset the game to zero state

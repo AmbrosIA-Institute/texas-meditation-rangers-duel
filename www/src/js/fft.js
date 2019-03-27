@@ -11,11 +11,7 @@ const defaults = {
 
   channels : 4
 
-
-
 }
-
-
 
 class FFT
 {
