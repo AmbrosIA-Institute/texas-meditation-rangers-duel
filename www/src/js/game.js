@@ -15,7 +15,7 @@ const defaults = {
   players: 2, 
 
   // Battle duration, in seconds
-  duration: 180,
+  duration: 5,
 
   // Game mode
   mode: 'none',
@@ -88,7 +88,7 @@ export default class Game
     // this.ui.settings.find('.settings-close').click( this.hideSettings );
     this.reset();
 
-    console.log('Constructor called');
+    console.log('Ready to Battle');
   }
 
   // Reset the game to zero state
@@ -106,9 +106,13 @@ export default class Game
     // Revert ui elements
     this.controls.time.text('00:00');
     this.hideModal();
+    this.hideDial();
     this.element.removeClass('playing paused');
     this.controls.battle.html('BATTLE');
+    this.controls.reset.removeClass('confirm');
+    this.controls.reset.text('RESET');
     enable(this.controls.settings);
+    this.ui.output.find('h2.countdown').empty();
 
     // Clear any errors
     this.clearErrors();
@@ -117,6 +121,8 @@ export default class Game
     $.each(this.players, function(index,player){
       player.reset();
     });
+
+    console.log('RESET');
   }
 
   // Init battle, ui & start countdown
@@ -184,6 +190,10 @@ export default class Game
 
     const words = ['one','two','three','four','five','six','seven','eight','nine','ten'];
 
+    disable(this.controls.settings);
+    disable(this.controls.battle);
+    disable(this.controls.reset);
+
     out.text('0'+count);
     out2.text( words[count-1] );
     this.ui.modal.addClass('show');
@@ -194,10 +204,16 @@ export default class Game
       if( count < 0 )
       {
         window.clearInterval(interval);
+
         out.text('00');
+
+        enable(this.controls.battle);
+        enable(this.controls.reset);
+
         this.hideModal();
-        console.log('Countdown finished');
         this.startBattle();
+
+        console.log('Countdown finished');
       }
       else
       {
@@ -229,10 +245,6 @@ export default class Game
       player.startStream();
     });
 
-    this.hideModal();
-
-    console.log('START WPN', window.performance.now());
-
     window.requestAnimationFrame( this.frame.bind(this) );
 
 
@@ -242,6 +254,7 @@ export default class Game
   // collect player scores here, ending sequences etc.
   endBattle()
   {
+    console.log('END OF BATTLE');
     this.stop();
   }
 
@@ -249,7 +262,15 @@ export default class Game
   // passes timestamp DOUBLE with milliseconds
   frame(ts)
   {
+    if( ! this.playing ) return;
+
     if( ! this.startTime ) this.startTime = ts;
+
+    if( this.paused )
+    {
+      window.requestAnimationFrame( this.frame.bind(this) );
+      return;
+    }
 
     this.battleTime = Math.floor(ts - this.startTime);
 
@@ -257,12 +278,23 @@ export default class Game
 
     this.currentFrame++;
 
-    console.log('FRAME', this.currentFrame, this.battleTime, seconds);
+    console.log('FRAME', this.currentFrame, 'TS',ts, 'BT',this.battleTime,'S',seconds,'D', this.config.duration);
 
-    if( this.seconds >= this.config.duration ) 
-    {
+    if( seconds >= this.config.duration ) 
+    {  
       this.endBattle();
+      return;
     }
+
+    const t = this.config.duration - seconds;
+    const m = Math.floor( t / 60 );
+    const s = Math.floor( t % 60 );
+    const c = ( m < 10 ? '0'+m : m ) + ':' + ( s < 10 ? '0'+s : s );
+    console.log(t,m,s,c);
+
+    this.controls.time.text(c);
+
+
 
     if( this.playing ) window.requestAnimationFrame( this.frame.bind(this) );
 
@@ -273,7 +305,8 @@ export default class Game
     this.controls.battle.html('RESUME');
     this.paused = true;
     this.element.addClass('paused');
-    console.log('PAUSE', this.paused);
+    this.ui.output.find('h2.message').text('PAUSED');
+    console.log('PAUSED');
   }
 
   resume()
@@ -281,7 +314,8 @@ export default class Game
     this.controls.battle.html('PAUSE');
     this.paused = false;
     this.element.removeClass('paused');
-    console.log('RESUME', this.paused);
+    this.ui.output.find('h2.message').empty();
+    console.log('RESUME');
   }
 
   hideModal()
@@ -319,9 +353,29 @@ export default class Game
   // Reset button listener
   onResetClick(e)
   {
-    if( ! this.playing ) { this.reset(); return; }
+    if( ! $(e.target).hasClass('confirm') )
+    {
+      let btn = $(e.target);
+      btn.addClass('confirm');
+      btn.text('CONFIRM');
+      $(document).on('click touchstart', function(){
+        btn.removeClass('confirm');
+        btn.text('RESET');
+      });
+      e.stopPropagation();
+      return false;
+    } 
+    else
+    {
+      if( this.playing ) {
+        this.stop();
+      } else {
+        this.reset();
+      }
+    }
 
-    this.stopBattle();
+
+    
   }
 
   // Battle button listener
@@ -419,14 +473,14 @@ export default class Game
   // Show error in the display
   showError( msg )
   {
-    this.ui.output.find('h2.error').empty().text(msg);
+    this.ui.output.find('h2.error').empty().text(msg).css('opacity', 1);
   }
 
   // Clear error display
   clearErrors()
   {
     this.errors = [];
-    this.ui.output.find('h2.error').empty();
+    this.ui.output.find('h2.error').empty().css('opacity', 0);
   }
 
   // UI elements

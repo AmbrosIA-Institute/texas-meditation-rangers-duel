@@ -52,24 +52,24 @@ section#game
           transform: translateX(-50%);
         }
 
-        h2.countdown 
+        h2.message 
         {
-          font-size: 8rem;
-          font-weight: 700;
-          font-family: $font-secondary;
-          color:white;
+          font-size:2rem;
+          font-weight: 200;
+          font-family: $font-primary;
+          color:$color-white;
           opacity:0.7;
           mix-blend-mode: screen;
+          top:36%;
           width:100%;
           text-align:center;
         }
 
         h2.error {
           top:46%;
-          color:darken($color-red, 20%);
+          color:darken($color-red, 10%);
           font-size:2rem;
-          font-weight: 200;
-          opacity:0;
+          font-weight:200;
         }
       }
     
@@ -83,12 +83,25 @@ section#game
         opacity:1;
       }
     }
+
+    #players
+    {
+      .player {
+        opacity:1;
+      }
+    }
   }
 
   &.paused {
     .display {
       #window {
         opacity:0.7;
+      }
+    }
+    #players
+    {
+      .player {
+        opacity:0.9;
       }
     }
   }
@@ -102,65 +115,7 @@ section#game
 
     @import 'player';
 
-    .player-1 
-    {
-      color:$color-player-one;
-
-      .player-detail .player-icon path.head,
-      .player-status .player-status-track-fill,
-      .player-status .player-status-goal,
-      {
-        fill:$color-player-one;
-        color:$color-player-one;
-        background-color:$color-player-one;
-      }
-      
-      .player-feedback 
-      {
-        .fl .icon-headset path.front-left,
-        .fr .icon-headset path.front-right,
-        .bl .icon-headset path.back-left,
-        .br .icon-headset path.back-right {
-          stroke: $color-player-one;
-        }
-      }
-    }
-
-    .player-2 
-    {
-      right:0;
-      color:$color-player-two;
-
-      .player-detail .player-icon path.head,
-      .player-status .player-status-track-fill,
-      .player-status .player-status-goal,
-      {
-        fill:$color-player-two;
-        color:$color-player-two;
-        background-color:$color-player-two;
-      }
-      
-      .player-feedback 
-      {
-        .fl .icon-headset path.front-left,
-        .fr .icon-headset path.front-right,
-        .bl .icon-headset path.back-left,
-        .br .icon-headset path.back-right {
-          stroke: $color-player-two;
-        }
-      }
-
-      .player-detail
-      {
-        flex-direction: row-reverse;
-
-        .player-icon 
-        {
-          transform: scale(-$player-icon-scale, $player-icon-scale );
-        }
-      }
-      
-    }
+    
 
 
   }

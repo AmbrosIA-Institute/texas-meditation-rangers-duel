@@ -62,4 +62,12 @@
     outline:none;
   }
 
+  button.control-reset {
+    &.confirm {
+      background-color:$color-red;
+      color:$color-white;
+      border-color:$color-white;
+    }
+  }
+
 }

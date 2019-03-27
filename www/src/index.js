@@ -1,6 +1,9 @@
 import jQuery from 'jquery';
 import bootstrap from 'bootstrap';
 
+// Import PIXI
+import './vendor/pixi.min.js';
+
 // SVG Graphics
 import './images/headset.svg';
 import './images/player.svg';

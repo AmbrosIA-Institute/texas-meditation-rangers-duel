@@ -8,6 +8,8 @@
   flex-direction: column;
   justify-content: space-between;
   box-sizing:border-box;
+  opacity:0.9;
+  transition: all 250ms $ease-out-quint;
 
   .player-detail 
   {
@@ -165,5 +167,69 @@
 
 }
 
+
+.player-1 
+{
+  color:$color-player-one;      
+
+  .player-detail .player-icon path.head,
+  .player-status .player-status-track-fill,
+  .player-status .player-status-goal,
+  {
+    fill:$color-player-one;
+    color:$color-player-one;
+    background-color:$color-player-one;
+  }
+
+  .player-detail .player-icon .svg g {
+    text-shadow: 0 0 10px $color-player-one;
+  }
+  
+  .player-feedback 
+  {
+    .fl .icon-headset path.front-left,
+    .fr .icon-headset path.front-right,
+    .bl .icon-headset path.back-left,
+    .br .icon-headset path.back-right {
+      stroke: $color-player-one;
+    }
+  }
+}
+
+.player-2 
+{
+  right:0;
+  color:$color-player-two;
+
+  .player-detail .player-icon path.head,
+  .player-status .player-status-track-fill,
+  .player-status .player-status-goal,
+  {
+    fill:$color-player-two;
+    color:$color-player-two;
+    background-color:$color-player-two;
+  }
+  
+  .player-feedback 
+  {
+    .fl .icon-headset path.front-left,
+    .fr .icon-headset path.front-right,
+    .bl .icon-headset path.back-left,
+    .br .icon-headset path.back-right {
+      stroke: $color-player-two;
+    }
+  }
+
+  .player-detail
+  {
+    flex-direction: row-reverse;
+
+    .player-icon 
+    {
+      transform: scale(-$player-icon-scale, $player-icon-scale );
+    }
+  }
+  
+}
 
 
