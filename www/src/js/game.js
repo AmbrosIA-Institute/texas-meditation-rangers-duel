@@ -21,12 +21,11 @@ const defaults = {
   mode: 'none',
 
   // How many seconds to countdown
-  countdown: 5,
+  countdown: 3,
 
   // Type of countdown
   cdtype: 'modal',
 }
-
 
 const disable = function(element){
   $(element).addClass('disabled').attr('disabled','disabled');
@@ -34,6 +33,16 @@ const disable = function(element){
 
 const enable = function(element){
   $(element).removeClass('disabled').removeAttr('disabled');
+}
+
+const show = function( element )
+{
+  $(element).addClass('show');
+}
+
+const hide = function( element )
+{
+  $(element).removeClass('show');
 }
 
 export default class Game
@@ -82,12 +91,29 @@ export default class Game
     console.log('Constructor called');
   }
 
+  // Reset the game to zero state
   reset()
   {
+    // Reset game props
+    this.playing             = false;
+    this.paused              = false;
+    
+    this.startTime           = null;
+    this.battleTime          = 0;
+    this.battleTimeRemaining = 0;
+    this.currentFrame        = 0;
+
+    // Revert ui elements
     this.controls.time.text('00:00');
+    this.hideModal();
+    this.element.removeClass('playing paused');
+    this.controls.battle.html('BATTLE');
+    enable(this.controls.settings);
 
-    this.clearError();
+    // Clear any errors
+    this.clearErrors();
 
+    // Reset players
     $.each(this.players, function(index,player){
       player.reset();
     });
@@ -102,12 +128,8 @@ export default class Game
     // Battle button becomes pause button
     this.controls.battle.html('PAUSE');
 
-   
-
-    
-
     this.playing = true;
-    this.paused  = false;
+    this.paused  = true;
 
     // Start countdown
     if( this.config.cdtype == 'modal' ) {
@@ -117,6 +139,12 @@ export default class Game
     }
     
 
+  }
+
+  // Stop the current battle processes and reset
+  stop()
+  {
+    this.reset();
   }
 
   // Starts the battle countdown
@@ -159,6 +187,7 @@ export default class Game
     out.text('0'+count);
     out2.text( words[count-1] );
     this.ui.modal.addClass('show');
+    count--;
 
     const interval = window.setInterval( function()
     {
@@ -166,7 +195,7 @@ export default class Game
       {
         window.clearInterval(interval);
         out.text('00');
-        this.ui.modal.removeClass('show');
+        this.hideModal();
         console.log('Countdown finished');
         this.startBattle();
       }
@@ -187,49 +216,112 @@ export default class Game
   startBattle()
   {
     // Set playing class
-    this.element.addClass('is-playing');
-    // Show the meter
-    this.ui.meter.addClass('show');
+    this.element.addClass('playing');
+
+    // Unpause game
+    this.resume();
+    
+    // Show the meter dial
+    this.showDial();
 
     // this.startTimer();
     $.each(this.players, function(index,player){
       player.startStream();
     });
 
-    this.ui.modal.removeClasS('show');
+    this.hideModal();
+
+    console.log('START WPN', window.performance.now());
 
     window.requestAnimationFrame( this.frame.bind(this) );
 
 
   }
 
-  // Called each frame during battle
-  frame()
+  // Called when battle reaches time
+  // collect player scores here, ending sequences etc.
+  endBattle()
   {
+    this.stop();
+  }
+
+  // Called each frame during battle via requestAnimationFrame
+  // passes timestamp DOUBLE with milliseconds
+  frame(ts)
+  {
+    if( ! this.startTime ) this.startTime = ts;
+
+    this.battleTime = Math.floor(ts - this.startTime);
+
+    const seconds = Math.floor(this.battleTime/1000);
+
+    this.currentFrame++;
+
+    console.log('FRAME', this.currentFrame, this.battleTime, seconds);
+
+    if( this.seconds >= this.config.duration ) 
+    {
+      this.endBattle();
+    }
+
+    if( this.playing ) window.requestAnimationFrame( this.frame.bind(this) );
 
   }
 
   pause()
   {
-
+    this.controls.battle.html('RESUME');
+    this.paused = true;
+    this.element.addClass('paused');
+    console.log('PAUSE', this.paused);
   }
 
+  resume()
+  {
+    this.controls.battle.html('PAUSE');
+    this.paused = false;
+    this.element.removeClass('paused');
+    console.log('RESUME', this.paused);
+  }
 
- 
+  hideModal()
+  {
+    this.ui.modal.removeClass('show');
+  }
+
+  showModal()
+  {
+    this.ui.modal.addClass('show');
+  }
+
+  hideDial()
+  {
+    this.ui.meter.removeClass('show');
+  }
+
+  showDial()
+  {
+    this.ui.meter.addClass('show');
+  }
+
+  
 
   // Add listeners to controls
   initControls()
   {
-    this.controls.settings.click( this.onSettingsClick.bind(this) );
-    this.controls.close.click( this.onSettingsClose.bind(this) );
-    this.controls.battle.click( this.onBattleClick.bind(this) );
-    this.controls.reset.click( this.onResetClick.bind(this) );
+    // listen for mouse and mobile touch
+    this.controls.settings.on('click touchstart', this.onSettingsClick.bind(this) );
+    this.controls.close.on('click touchstart', this.onSettingsClose.bind(this) );
+    this.controls.battle.on('click touchstart', this.onBattleClick.bind(this) );
+    this.controls.reset.on('click touchstart', this.onResetClick.bind(this) );
   }
 
   // Reset button listener
   onResetClick(e)
   {
-    if( ! this.playing ) return;
+    if( ! this.playing ) { this.reset(); return; }
+
+    this.stopBattle();
   }
 
   // Battle button listener
@@ -238,11 +330,11 @@ export default class Game
     if( ! this.playing ) 
     {
       this.start();
+      return;
     }
-    else
-    {
-      // Pause the game
-    }
+  
+    if( this.paused ) { this.resume() } else { this.pause(); }
+  
   }
 
   // Open settings panel
@@ -262,15 +354,13 @@ export default class Game
   initSettings()
   {
     // UI adjust on battery
-    // 0% = right:2.6rem / 100% = right:0.2rem
-    this.settings.battery.find('.player').each(function(){
-      const level = parseInt(Math.random() * 100);
-      const rem = (2.3 * (level/100)) + 0.3;
-      const perc = ( level < 10 ? '0'+level : level ) + '%';
+    // UI adjust on battery
+    this.settings.battery.find('.player').each(function(i,player){
 
-      $(this).find('.battery-percent').text(perc)
-      $(this).find('.battery-f').css('right', rem + 'rem');
-    });
+      const level = parseInt(Math.random() * 100);
+      this.setBatteryLevel(player, level);
+  
+    }.bind(this));
 
     this.settings.duration.find('#battle-duration').on('change', function(){
       game.config.duration = parseInt($(this).val());
@@ -295,15 +385,12 @@ export default class Game
   refreshSettings()
   {
     // UI adjust on battery
-    this.settings.battery.find('.player').each(function(){
-      const level = parseInt(Math.random() * 100);
-      // 0% = right:2.6rem / 100% = right:0.3rem
-      const rem = (2.3 * (level/100)) + 0.3;
-      const perc = ( level < 10 ? '0'+level : level ) + '%';
+    this.settings.battery.find('.player').each(function(i,player){
 
-      $(this).find('.battery-percent').text(perc)
-      $(this).find('.battery-f').css('right', rem + 'rem');
-    });
+      const level = parseInt(Math.random() * 100);
+      this.setBatteryLevel(player, level);
+  
+    }.bind(this));
 
     //console.log('Settings', this.settings);
     this.settings.duration.find('#battle-duration').val( this.config.duration );
@@ -311,10 +398,22 @@ export default class Game
      //console.log('Mode', this.settings.mode.find('.mode-list li') );
     this.settings.mode.find('.mode-list li').each(function(){
       let active = $(this).data('mode') == game.config.mode;
-      console.log('Mode', $(this).data('mode'));
+      // console.log('Mode', $(this).data('mode'));
       $(this).toggleClass('active', active);
     });
 
+  }
+
+  // Set battery level in settings
+  setBatteryLevel( player, level )
+  {
+    const perc  = ( level < 10 ? '0'+level : level ) + '%';
+    const right = 100-level;
+
+    $(player).find('.battery-percent').text(perc);
+
+    // console.log(level, right);
+    $(player).find('.battery-f').css('right', right + '%');
   }
 
   // Show error in the display
@@ -324,8 +423,9 @@ export default class Game
   }
 
   // Clear error display
-  clearError()
+  clearErrors()
   {
+    this.errors = [];
     this.ui.output.find('h2.error').empty();
   }
 

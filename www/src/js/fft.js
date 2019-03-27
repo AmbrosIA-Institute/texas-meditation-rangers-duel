@@ -27,14 +27,14 @@ class FFT
 
     this.stopped = true;
 
-    console.log(this.channels);
+    // console.log(this.channels);
 
     //console.log(PIXI);
     //console.log(PIXI.audoDetectRenderer);
 
     this.renderer = PIXI.autoDetectRenderer();
 
-    console.log(this.renderer);
+    // console.log(this.renderer);
 
   }
 
@@ -47,7 +47,7 @@ class FFT
   {
     this.stopped = false;
     this.setup();
-    console.log(this.renderer);
+    // console.log(this.renderer);
     this.element.html(this.view);
     this.animate();
   }

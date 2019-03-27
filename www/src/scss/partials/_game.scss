@@ -77,10 +77,18 @@ section#game
 
   }
 
-  &.is-playing {
+  &.playing {
     .display {
       #window #glow {
         opacity:1;
+      }
+    }
+  }
+
+  &.paused {
+    .display {
+      #window {
+        opacity:0.7;
       }
     }
   }
