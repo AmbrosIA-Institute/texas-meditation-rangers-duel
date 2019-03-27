@@ -17,7 +17,7 @@ Commands should always be run in 'www' directory
 
 Don't commit contents of 'dist' directory
 
-A browser window should open in http://localhost:3000 
+A browser window should open in http://localhost:3000 and will watch for changes in `/www/src` and publish to `/www/dist`
 
 ### Other Commands
 Run dev build without reload
