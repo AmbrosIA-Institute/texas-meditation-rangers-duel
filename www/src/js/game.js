@@ -382,6 +382,15 @@ export default class Game
     this.controls.close.on('click touchstart', this.onSettingsClose.bind(this) );
     this.controls.battle.on('click touchstart', this.onBattleClick.bind(this) );
     this.controls.reset.on('click touchstart', this.onResetClick.bind(this) );
+    this.controls.reset.on('mouseout', this.cancelResetConfirm.bind(this) );
+  }
+
+  // Cancel reset confirmation
+  cancelResetConfirm(e)
+  {
+    e.stopPropagation();
+    this.controls.reset.removeClass('confirm').text('RESET');
+    $(document).off('click touchstart', this.cancelResetConfirm);
   }
 
   // Reset button listener
@@ -389,14 +398,12 @@ export default class Game
   {
     if( ! $(e.target).hasClass('confirm') )
     {
-      let btn = $(e.target);
-      btn.addClass('confirm');
-      btn.text('CONFIRM');
-      $(document).on('click touchstart', function(){
-        btn.removeClass('confirm');
-        btn.text('RESET');
-      });
       e.stopPropagation();
+
+      $(e.target).addClass('confirm').text('CONFIRM');
+    
+      $(document).on('click touchstart', this.cancelResetConfirm.bind(this));
+      
       return false;
     } 
     else
