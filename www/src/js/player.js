@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import FFT from './fft';
-import Muse from './muse';
+//import MusePlugin from './muse';
 
 
 export default class Player
@@ -43,13 +43,13 @@ export default class Player
 	// Attempt to connect
 	connect()
 	{
-		Muse.connect( this.index, this.onConnectResponse.bind(this), this.onConnectFailure.bind(this) );
+		MusePlugin.connect( this.index, this.onConnectResponse.bind(this), this.onConnectFailure.bind(this) );
 	}
 
 	// Disconnect headset
 	disconnect()
 	{
-		Muse.diconnect(this.index);
+		MusePlugin.diconnect(this.index);
 	}
 
 	// Parse connection response
@@ -71,7 +71,7 @@ export default class Player
 			case 'FFT':
 				for( let i=0; i<4; i++ )
 				{
-					this.fft[i] = response['values'+i];
+					this.streams[i].channelData[0] = response['values'+i];
 				}
 				break;
 
@@ -79,7 +79,7 @@ export default class Player
 				break;
 		}
 
-		console.log(type, response);
+            //console.log(type, response);
 
 	}
 
@@ -92,9 +92,10 @@ export default class Player
 	startFFT()
 	{
 		  this.ffts = this.element.find('.fft');
-
+		  this.streams = [];
 			$.each(this.ffts, function(j,fft){
-			   const pfft = new FFT(fft, { channels : 1 } );
+                           const pfft = new FFT(fft, { channels : 1 } );
+                           pfft.demoMode = false;
 			   pfft.start();
 			   this.streams.push(pfft);
 			}.bind(this));

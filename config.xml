@@ -25,5 +25,4 @@
     </platform>
     <plugin name="cordova-plugin-android-fullscreen" spec="^1.0.0" />
     <plugin name="institute.ambrosia.museplugin" spec="../cordova-plugin-muse" />
-    <engine name="android" spec="^6.4.0" />
 </widget>

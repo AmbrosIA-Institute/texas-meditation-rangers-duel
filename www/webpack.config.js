@@ -20,7 +20,8 @@ module.exports = {
   },
 
   externals: {
-    jQuery: 'jQuery'
+      jQuery: 'jQuery',
+      MusePlugin: 'MusePlugin'
   },
 
   // Module Rules

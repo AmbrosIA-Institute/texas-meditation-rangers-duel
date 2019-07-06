@@ -15,7 +15,7 @@ const defaults = {
   players: 2, 
 
   // Battle duration, in seconds
-  duration: 10,
+  duration: 180,
 
   // Game mode
   mode: 'none',
@@ -312,7 +312,7 @@ export default class Game
 
     this.currentFrame++;
 
-    console.log('FRAME', this.currentFrame, 'TS',ts, 'BT',this.battleTime,'S',seconds,'D', this.config.duration);
+      //console.log('FRAME', this.currentFrame, 'TS',ts, 'BT',this.battleTime,'S',seconds,'D', this.config.duration);
 
     if( seconds >= this.config.duration ) 
     {  
@@ -324,7 +324,7 @@ export default class Game
     const m = Math.floor( t / 60 );
     const s = Math.floor( t % 60 );
     const c = ( m < 10 ? '0'+m : m ) + ':' + ( s < 10 ? '0'+s : s );
-    console.log(t,m,s,c);
+      //console.log(t,m,s,c);
 
     this.controls.time.text(c);
 
@@ -383,6 +383,9 @@ export default class Game
     this.controls.battle.on('click touchstart', this.onBattleClick.bind(this) );
     this.controls.reset.on('click touchstart', this.onResetClick.bind(this) );
     this.controls.reset.on('mouseout', this.cancelResetConfirm.bind(this) );
+
+    this.controls.player1.on('click touchstart', this.onPlayer1.bind(this) );
+    this.controls.player2.on('click touchstart', this.onPlayer2.bind(this) );
   }
 
   // Cancel reset confirmation
@@ -391,6 +394,20 @@ export default class Game
     e.stopPropagation();
     this.controls.reset.removeClass('confirm').text('RESET');
     $(document).off('click touchstart', this.cancelResetConfirm);
+  }
+
+  onPlayer1()
+  {
+    this.players[0].startStream();
+      //this.players[0].disconnect();
+    this.players[0].connect();
+  }
+
+  onPlayer2()
+  {
+    this.players[1].startStream();
+      //this.players[0].disconnect();
+    this.players[1].connect();
   }
 
   // Reset button listener
@@ -548,6 +565,8 @@ export default class Game
       reset    : this.ui.controls.find('.control-reset'),
       time     : this.ui.controls.find('.control-time'),
       close    : this.ui.settings.find('.settings-close'),
+      player1  : this.ui.settings.find('.player-1'),
+      player2  : this.ui.settings.find('.player-2'),
     }
   }
 
