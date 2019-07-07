@@ -28,10 +28,13 @@ export default class Player
         // Total point score
         this.score  = this._score = 0;
 
+        //this.startFFT();
+        /*
         $.each(this.streams, function(i,stream){
             stream.stop();
             stream.reset();
         });
+        */
 
     }
 
@@ -74,7 +77,9 @@ export default class Player
         switch(type)
         {
             case 'MELLOW':
-                this.mellow = response['value'];
+                this.mellow = response['value'] * 100;
+                this.status = Math.round(this.mellow);
+                console.log("Player " + this.number + " mellow " + this.mellow);
                 break;
 
             case 'FFT':
@@ -153,7 +158,13 @@ export default class Player
 
     get score()
     {
-        return this._score;
+        return parseInt(this._score);
+    }
+
+    finalscore(n)
+    {
+        this._score = n.toString().padStart(4, '0');
+        this.ui.score.text(this._score + " FINAL");
     }
 
 }
