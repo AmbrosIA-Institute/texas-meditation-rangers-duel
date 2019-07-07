@@ -99,6 +99,11 @@ export default class Game
     {
       players.push(new Player(i));
     }
+    for( let i=0; i<this.config.players; i++ )
+    {
+      setTimeout(function(){ players[i].startStream(); }, 10);
+    }
+
 
     this.players = players;
 
@@ -276,7 +281,7 @@ export default class Game
 
     // this.startTimer();
     $.each(this.players, function(index,player){
-      player.startStream();
+        //player.startStream();
     });
 
     window.requestAnimationFrame( this.frame.bind(this) );
@@ -398,14 +403,14 @@ export default class Game
 
   onPlayer1()
   {
-    this.players[0].startStream();
+      //this.players[0].startStream();
       //this.players[0].disconnect();
     this.players[0].connect();
   }
 
   onPlayer2()
   {
-    this.players[1].startStream();
+      //this.players[1].startStream();
       //this.players[0].disconnect();
     this.players[1].connect();
   }
