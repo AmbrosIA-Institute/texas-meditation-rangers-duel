@@ -38,7 +38,7 @@ class FFT
     this.stopped = true;
 
     // Set renderer
-    this.renderer = config.renderer || PIXI.autoDetectRenderer();
+    this.renderer = config.renderer || PIXI.autoDetectRenderer(this.width, this.height, { transparent: true, antialias: true, legacy: true });
 
   }
 
