@@ -67,6 +67,8 @@ export default class Player
     // Parse connection response
     onConnectResponse(response)
     {
+        console.log(this.number, window.performance.now(), response);
+
         if( typeof response == 'string' ) {
             console.log(JSON.stringify(response, null, 4));
             return;
@@ -77,9 +79,10 @@ export default class Player
         switch(type)
         {
             case 'MELLOW':
+
                 this.mellow = response['value'] * 100;
                 this.status = Math.round(this.mellow);
-                console.log("Player " + this.number + " mellow " + this.mellow);
+                // console.log("Player " + this.number + " mellow " + this.mellow);
                 break;
 
             case 'FFT':
