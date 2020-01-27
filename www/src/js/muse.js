@@ -1,5 +1,5 @@
-// const exec = require('cordova/exec');
-const exec = require('./exec.js');
+const exec = require('cordova/exec');
+// const exec = require('./exec.js');
 // import exec from 'cordova/exec';
 
 class Muse 
