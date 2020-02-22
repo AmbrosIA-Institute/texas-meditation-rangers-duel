@@ -9,7 +9,7 @@ const defaults = {
 
   rescaleFactor : 0.2,
 
-  channels : 4
+  channels : 1
 
 }
 
@@ -30,7 +30,7 @@ class FFT
 
     this.barEdgeColor = 0x0000FF;
     this.barFillColor = 0x00FF00;
-    this.demoMode = true;
+    this.demoMode = false;
     this.stage = new PIXI.Container();
     this.stage.interactive = true;
     this.boundAnimate = this.animate.bind(this);

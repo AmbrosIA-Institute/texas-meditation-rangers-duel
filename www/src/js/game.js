@@ -31,6 +31,9 @@ const defaults = {
 
     // Starting width
     width: 1024,
+
+    // Meter size
+    meterScale: 1.2,
 }
 
 const disable = function(element){
@@ -60,6 +63,8 @@ export default class Game
 
         // Create instance
         game = new Game(id, config);
+
+       //  console.log('crypto', window.crypto.getRandomValues );
 
     }
 
@@ -99,11 +104,7 @@ export default class Game
         {
             players.push(new Player(i));
         }
-        for( let i=0; i<this.config.players; i++ )
-        {
-            setTimeout(function(){ players[i].startStream(); }, 10);
-        }
-
+   
 
         this.players = players;
 
@@ -270,21 +271,23 @@ export default class Game
     // Starts the actual battle sequence
     startBattle()
     {
-        // Set playing class
-        this.element.addClass('playing');
+      // Set playing class
+      this.element.addClass('playing');
 
-        // Unpause game
-        this.resume();
+      // Unpause game
+      this.resume();
 
-        // Show the meter dial
-        this.showDial();
+      // Show the meter dial
+      this.showDial();
 
-        // this.startTimer();
-        $.each(this.players, function(index,player){
-            //player.startStream();
-        });
+      console.log('Starting Battle, Mode: ' + this.config.mode);
+      // this.startTimer();
+      $.each(this.players, function(index,player){
+          player.setMode(this.config.mode);
+          player.startStream();
+      }.bind(this));
 
-        window.requestAnimationFrame( this.frame.bind(this) );
+      window.requestAnimationFrame( this.frame.bind(this) );
 
 
     }
@@ -341,27 +344,44 @@ export default class Game
             this.controls.time.text(c);
         }
 
+    
         if (seconds > lastFrameSeconds)
         {
+          console.log('Update scores!');
+          $.each(this.players, function(i,player){
+            player.updateScore();
+          });
+
+          this.updateMeter();
             
-            for( let i=0; i<this.config.players; i++ )
-            {
-                var mellow = players[i].mellow;
-                if (mellow > 90) {
-                    players[i].score += 15;
-                } else if (mellow > 80) {
-                    players[i].score += 3;
-                    //players[i].score(players[i].score() + 3);
-                } else if (mellow > 75) {
-                    players[i].score += 1;
-                }
-
-            }
-
         }
 
         if( this.playing ) window.requestAnimationFrame( this.frame.bind(this) );
 
+    }
+
+    updateMeter()
+    {
+      const s1  = this.players[0].score || 0;
+      const s2  = this.players[1].score || 0;
+      const lim = 30;
+      const d   = s1 - s2;
+
+      this.setMeterDegrees(-d);
+
+      
+
+
+    }
+
+    setMeterDegrees(deg)
+    {
+      // Keep it under 90 degrees
+      if( Math.abs(deg) >= 90 ) deg = 90*(deg/Math.abs(deg));
+
+      const scale  = 'scale('+this.config.meterScale+','+this.config.meterScale+')';
+      const rotate = 'rotate('+deg+'deg)';
+      this.ui.meter.find('.dial-svg').css({ transform: scale+' '+rotate});
     }
 
     pause()
@@ -370,6 +390,10 @@ export default class Game
         this.paused = true;
         this.element.addClass('paused');
         this.ui.output.find('h2.message').text('PAUSED');
+
+        $.each(this.players,function(i,player){
+          player.pause();
+        });
         console.log('PAUSED');
     }
 
@@ -379,6 +403,13 @@ export default class Game
         this.paused = false;
         this.element.removeClass('paused');
         this.ui.output.find('h2.message').empty();
+
+        $.each(this.players,function(i,player){
+          console.log('player',player);
+          console.log('i',i);
+          player.resume();
+        });
+
         console.log('RESUME');
     }
 
@@ -399,7 +430,8 @@ export default class Game
 
     showDial()
     {
-        this.ui.meter.addClass('show');
+      this.setMeterDegrees(0);
+      //this.ui.meter.addClass('show');
     }
 
 
@@ -430,14 +462,14 @@ export default class Game
     {
         //this.players[0].startStream();
         //this.players[0].disconnect();
-        this.players[0].connect();
+        // this.players[0].connect();
     }
 
     onPlayer2()
     {
         //this.players[1].startStream();
         //this.players[0].disconnect();
-        this.players[1].connect();
+        // this.players[1].connect();
     }
 
     // Reset button listener
